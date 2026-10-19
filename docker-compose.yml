@@ -1,3 +1,4 @@
+
 version: '3.8'
 
 services:
@@ -5,7 +6,7 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: malvi  # replace with your MySQL root password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD is required}
       MYSQL_DATABASE: cricket_db
     volumes:
       - db_data:/var/lib/mysql
@@ -20,9 +21,10 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASS: malvi  # replace with your MySQL root password
+      DB_PASS: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD is required}
     volumes:
       - app_data:/app/data
+
 volumes:
   db_data:
   app_data:
